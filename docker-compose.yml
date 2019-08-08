@@ -16,12 +16,11 @@ services:
     image: result-webapp:1.0
     restart: on-failure
     volumes:
-      - ./result:/app
+      - ./src/result:/app
     depends_on:
       - "db"
     ports:
       - "5001:80"
-      - "5858:5858"
     networks:
       - front-tier
       - back-tier
@@ -46,6 +45,8 @@ services:
     image: postgres:11.4-alpine
     container_name: db
     restart: on-failure
+    environment:
+      POSTGRES_PASSWORD: password
     volumes:
       - ./db-data:/var/lib/postgresql/data"
     networks:
