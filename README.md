@@ -1,3 +1,3 @@
 # Voting App
 
-Application source taken from https://github.com/subfuzion/voting-app.
+Application source code taken from https://github.com/dockersamples/example-voting-app.

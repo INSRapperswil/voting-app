@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+  vote:
+    build: ./src/vote
+    image: vote-webapp:1.0
+    restart: on-failure
+    ports:
+      - "5000:80"
+    networks:
+      - front-tier
+      - back-tier
+
+  result:
+    build: ./src/result
+    image: result-webapp:1.0
+    restart: on-failure
+    volumes:
+      - ./result:/app
+    depends_on:
+      - "db"
+    ports:
+      - "5001:80"
+      - "5858:5858"
+    networks:
+      - front-tier
+      - back-tier
+
+  worker:
+    build: ./src/worker
+    image: worker-app:1.0
+    restart: on-failure
+    depends_on:
+      - "redis"
+    networks:
+      - back-tier
+
+  redis:
+    image: redis:5.0.5-alpine
+    container_name: redis
+    restart: on-failure
+    networks:
+      - back-tier
+
+  db:
+    image: postgres:11.4-alpine
+    container_name: db
+    restart: on-failure
+    volumes:
+      - ./db-data:/var/lib/postgresql/data"
+    networks:
+      - back-tier
+
+networks:
+  front-tier:
+  back-tier:
+    internal: true
