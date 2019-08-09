@@ -15,8 +15,6 @@ services:
     build: ./src/result
     image: result-webapp:1.0
     restart: on-failure
-    volumes:
-      - ./src/result:/app
     depends_on:
       - "db"
     ports:
@@ -46,8 +44,6 @@ services:
     image: postgres:11.4-alpine
     container_name: db
     restart: on-failure
-    environment:
-      POSTGRES_PASSWORD: password
     volumes:
       # TODO: Mount the host directory "./db-data" to "/var/lib/postgresql/data" inside the container so the DB is persistent. https://docs.docker.com/compose/compose-file/#volumes
       - "..."
