@@ -18,8 +18,10 @@ services:
     depends_on:
       - "db"
     ports:
-      # TODO: Map the host port 5001 to the container's port 80. https://docs.docker.com/compose/compose-file/#ports
-      - "..."
+      # TODO: Map the host port 5001 to the
+      # container's port 80.
+      # https://docs.docker.com/compose/compose-file/#ports
+      - "…"
     networks:
       - front-tier
       - back-tier
@@ -45,13 +47,15 @@ services:
     container_name: db
     restart: on-failure
     volumes:
-      # TODO: Mount the host directory "./db-data" to "/var/lib/postgresql/data" inside the container so the DB is persistent. https://docs.docker.com/compose/compose-file/#volumes
-      - "..."
+      # TODO: Mount the host directory "./db-data"
+      # to "/var/lib/postgresql/data" inside the
+      # container so the DB is persistent.
+      # https://docs.docker.com/compose/compose-file/#volumes
+      - "…"
     networks:
       - back-tier
 
 networks:
   front-tier:
   back-tier:
-    # TODO: Since the back-tier network does not be reachable from the outside and the services inside this backend network does not need to communicate to the internet, configure this network as internal. https://docs.docker.com/compose/compose-file/#internal
-    ...: ...
+    internal: true
